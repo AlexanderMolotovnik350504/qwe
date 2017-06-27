@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: do39qo2zl
+  api_key: '883267458943346'
+  api_secret: Gpv4KCYxogyChKqBiIeZfe9aNDg
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: do39qo2zl
+  api_key: '883267458943346'
+  api_secret: Gpv4KCYxogyChKqBiIeZfe9aNDg
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: do39qo2zl
+  api_key: '883267458943346'
+  api_secret: Gpv4KCYxogyChKqBiIeZfe9aNDg
+  enhance_image_tag: true
+  static_image_support: false

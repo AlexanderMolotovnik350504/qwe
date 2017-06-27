@@ -1,0 +1,5 @@
+<p><%= step.name %>
+	<% if can? :destroy, step %>
+		<%= link_to "Delete", manual_step_path(step.manual, step), method: :delete %>
+	<% end %>
+</p>

@@ -1,0 +1,49 @@
+<%= stylesheet_link_tag    'manuals', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="container" >
+<p>
+<table>
+    <div class="card card-outline-danger w-50">
+    <div class="card-block">
+    <h4 class="card-title"><%= @manual.title %></h4>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Url: <%= link_to @manual.url, @manual.url %></li>
+    <li class="list-group-item">Category: <%= link_to @manual.category.name, @manual.category %></li>
+    <li class="list-group-item"><p class:="card-text">Tags: <%= raw @manual.tags.map(&:name).map{ |t| link_to t, tag_path(t), class: 'tag tag-primary'}.join(' ') %></p></li>
+    <% if @manual.steps.any? %>
+    Steps:
+      <li class="list-group-item"><a><%= render @manual.steps %></a></li>
+    <% end %>
+      <%= form_for([@manual, @manual.steps.build]) do |f| %>
+        <% if can? :update, @manual %></p>
+        <li class="list-group-item">
+            <%= f.text_field :name %>
+            <%= submit_tag "Add" %></li>
+        <% end %>
+      <% end %>
+      
+    </ul>
+    <div class="card-block">
+    <a class="card-link">
+    <% if can? :update, @manual %>
+        <%= link_to 'Edit', edit_manual_path(@manual) %>
+    <% end %>
+    <a class="card-link">
+      <% if can? :destroy, @manual %>
+          <%= link_to 'Destroy', @manual, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+      </a>
+      <a class="card-link">
+      <%= link_to like_manual_path(@manual), method: :put do %>
+        <%= image_tag('like.png', class: 'rounded-circle', width: '40', height:'40') %>
+      <% end %>
+      <%= @manual.get_upvotes.size %></a>
+      <a class="card-link">
+        <%= link_to unlike_manual_path(@manual), method: :put do %>
+          <%= image_tag('dislike.png', class: 'rounded-circle', width: '40', height:'40') %>
+        <% end %>
+        <%= @manual.get_downvotes.size %></a>
+      </div>
+      </table>
+<%= link_to 'Back', manuals_path %>
+</div>

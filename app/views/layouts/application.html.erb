@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cur</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Home</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/manuals">Manuals <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/categories"> Categories <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="navbar-toggler-right">
+          <% if current_user %>
+              Signed in as: <%= current_user.name %>
+              <%= link_to "Sign out", '/sign_out', method: :delete %>
+            <% else %>
+              <%= link_to "/auth/facebook" do %><%= image_tag('facebook.png', class: 'rounded-circle', width: '40', height:'40') %><% end %>
+              <%= link_to "/auth/twitter" do %><%= image_tag('twitter.png',class: 'rounded-circle', width: '40', height:'40') %><% end %>
+              <%= link_to "/auth/vkontakte" do %><%= image_tag('vkontakte.png', class: 'rounded-circle', width: '40', height:'40') %><% end %></li>
+            <% end %>
+        </ul>
+      </div>
+    </nav>
+
+<% flash.each do |key,value| %>
+  <div class="alert alert-info"><%= value %></div>
+<% end %>
+<%= yield %>
+  </body>
+</html>
